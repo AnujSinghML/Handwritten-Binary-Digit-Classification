@@ -12,12 +12,18 @@ import logging
 logging.getLogger("tensorflow").setLevel(logging.ERROR)
 tf.autograph.set_verbosity(0)
 
+#load_data() function is defined in autils.py file
 X, y = load_data()
+
+##----------------uncomment the following part to check if data is loaded correctly.------------------
 # print ('The first element of X is: ', X[0])
 # print ('The first element of y is: ', y[0,0])
 # print ('The last element of y is: ', y[-1,0])
+##------------------------------------------------------------------------------------------------------
 
-#Displaying the images (dataset):
+
+##uncomment the following part to visualize our dataset---------------------------------------------------
+##Displaying the images (dataset):
 # import warnings
 # warnings.simplefilter(action='ignore', category=FutureWarning)
 # m, n = X.shape
@@ -33,9 +39,9 @@ X, y = load_data()
 #     ax.imshow(X_random_reshaped, cmap='gray')
 #     # Display the label above the image
 #     ax.set_title(y[random_index,0])
-#     ax.set_axis_off()
-    
-# plt.show()    
+#     ax.set_axis_off()    
+# plt.show()  
+##-------------------------------------------------------------------------------------------------------
 
 model = Sequential(
     [               
@@ -69,7 +75,7 @@ model.fit(
     epochs=25
 )
 
-# #Let's compare the predictions vs the labels for a random sample of 64 digits. This might take a moment to run.
+# #uncomment the following part to compare the predictions vs the labels for a random sample of 64 digits. This might take a moment to run--------------------------------------
 # import warnings
 # warnings.simplefilter(action='ignore', category=FutureWarning)
 # m, n = X.shape
@@ -94,7 +100,7 @@ model.fit(
 #     ax.set_axis_off()
 # fig.suptitle("Label, yhat", fontsize=16)
 # plt.show()
-
+## --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 predictions = model.predict(X)
 binary_predictions = (predictions >= 0.5).astype(int)
 binary_predictions = binary_predictions.reshape(-1, 1)
